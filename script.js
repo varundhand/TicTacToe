@@ -30,7 +30,7 @@ let indexes = {
 };
 
 function addSvg(button, index) {
-  console.log("addSvg is running for", button, "for index", index);
+  // console.log("addSvg is running for", button, "for index", index);
 
   // const indexFoundUser = indexes.find((i) => {
   //   return i === index;
@@ -46,6 +46,7 @@ function addSvg(button, index) {
 function computerTurn() {
   // indexes.splice(randomIndex, 1);
 
+  // Get array of available indexes after user's turn
   const newIndexes = Object.entries(indexes)
     .filter((key) => {
       return key[1] === null;
@@ -54,13 +55,21 @@ function computerTurn() {
       return i[0];
     });
 
-  const randomIndex = Math.floor(Math.random() * newIndexes.length);
-  indexes[randomIndex] = "o";
-  console.log(newIndexes);
+  // Add an O in a random avaiable box
 
-  buttonNodes[
-    randomIndex
-  ].innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" id="circle"><path d="M10 .4A9.6 9.6 0 0 0 .4 10a9.6 9.6 0 1 0 19.2-.001C19.6 4.698 15.301.4 10 .4zm0 17.199A7.6 7.6 0 1 1 10 2.4a7.6 7.6 0 1 1 0 15.199z"></path></svg>`;
-  console.log(indexes);
+  // const randomIndex = Math.floor(Math.random() * newIndexes.length);
+  const randomIndex = newIndexes[Math.floor(Math.random() * newIndexes.length)];
+  indexes[randomIndex] = "o";
+  console.log("newIndexes >", newIndexes.length);
+
+  if (newIndexes.length !== 0) {
+    buttonNodes[
+      randomIndex
+    ].innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" id="circle"><path d="M10 .4A9.6 9.6 0 0 0 .4 10a9.6 9.6 0 1 0 19.2-.001C19.6 4.698 15.301.4 10 .4zm0 17.199A7.6 7.6 0 1 1 10 2.4a7.6 7.6 0 1 1 0 15.199z"></path></svg>`;
+  } else {
+    console.log("newIndexes exhausted");
+  }
+
+  console.log("indexes >", indexes);
   //update newIndexes
 }
