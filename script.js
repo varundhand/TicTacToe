@@ -6,12 +6,13 @@
 const buttonNodes = document.querySelectorAll("li");
 
 buttonNodes.forEach((buttonClicked, index) => {
-  buttonClicked.addEventListener("click", (event) => {
-    // we cant directly pass index in addeventlistener
-    addSvg(event, index);
-  });
+  console.log(buttonClicked);
+  buttonClicked.addEventListener("click", clickEvent);
 
-  // buttonClicked; //asign index to them
+  function clickEvent(event) {
+    addSvg(event, index);
+    event.target.removeEventListener("click", clickEvent);
+  }
 });
 
 let indexes = {
@@ -27,20 +28,20 @@ let indexes = {
 };
 
 function addSvg(button, index) {
-  // console.log("addSvg is running for", button, "for index", index);
+  // console.log("addSvg is running for", button, "for index", index); // button is the event
 
   // const indexFoundUser = indexes.find((i) => {
   //   return i === index;
   // });
   // indexes.splice(index, 1);
-
   indexes[index] = "x";
 
   button.target.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="92" height="92" id="cross"><path d="M70.7 64.3c1.8 1.8 1.8 4.6 0 6.4-.9.9-2 1.3-3.2 1.3-1.2 0-2.3-.4-3.2-1.3L46 52.4 27.7 70.7c-.9.9-2 1.3-3.2 1.3s-2.3-.4-3.2-1.3c-1.8-1.8-1.8-4.6 0-6.4L39.6 46 21.3 27.7c-1.8-1.8-1.8-4.6 0-6.4 1.8-1.8 4.6-1.8 6.4 0L46 39.6l18.3-18.3c1.8-1.8 4.6-1.8 6.4 0 1.8 1.8 1.8 4.6 0 6.4L52.4 46l18.3 18.3z"></path></svg>`;
-  setTimeout(computerTurn, 500);
+  setTimeout(computerTurn(button), 500);
+  console.log(button.target.innerHTML);
 }
 
-function computerTurn() {
+function computerTurn(event) {
   // Get array of available indexes after user's turn
   const newIndexes = Object.entries(indexes)
     .filter((key) => {
@@ -125,3 +126,7 @@ function checkWinner(object) {
     }
   }
 }
+
+// TODO 1: dont allow user to do input in filled boxes
+// TODO 2: check the late thingy in boxes
+// TODO 3: update UI function instead of window.alert
