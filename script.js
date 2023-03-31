@@ -6,9 +6,6 @@
 const buttonNodes = document.querySelectorAll("li");
 
 buttonNodes.forEach((buttonClicked, index) => {
-  // buttonClicked.addEventListener("click", (event) => addSvg(event, index));
-  // buttonClicked.addEventListener("click", addSvg(buttonClicked));
-
   buttonClicked.addEventListener("click", (event) => {
     // we cant directly pass index in addeventlistener
     addSvg(event, index);
@@ -44,8 +41,6 @@ function addSvg(button, index) {
 }
 
 function computerTurn() {
-  // indexes.splice(randomIndex, 1);
-
   // Get array of available indexes after user's turn
   const newIndexes = Object.entries(indexes)
     .filter((key) => {
@@ -60,7 +55,7 @@ function computerTurn() {
   // const randomIndex = Math.floor(Math.random() * newIndexes.length);
   const randomIndex = newIndexes[Math.floor(Math.random() * newIndexes.length)];
   indexes[randomIndex] = "o";
-  console.log("newIndexes >", newIndexes.length);
+  console.log("newIndexes >", newIndexes);
 
   if (newIndexes.length !== 0) {
     buttonNodes[
@@ -71,5 +66,62 @@ function computerTurn() {
   }
 
   console.log("indexes >", indexes);
-  //update newIndexes
+  checkWinner(indexes);
+}
+
+// const newIndexes2 = Object.entries(indexes);
+// console.log(newIndexes2);
+// newIndexes2.every(checkWinner);
+
+function checkWinner(object) {
+  // user is winnerobject
+  if (object["0"] === object["3"] && object["3"] === object["6"]) {
+    if (object["0"] === "x") {
+      window.alert("YOU WON :)");
+    } else if (object["0"] === "o") {
+      window.alert("YOU LOST :/");
+    }
+  } else if (object["0"] === object["1"] && object["1"] === object["2"]) {
+    if (object["0"] === "x") {
+      window.alert("YOU WON :)");
+    } else if (object["0"] === "o") {
+      window.alert("YOU LOST :/");
+    }
+  } else if (object["2"] === object["5"] && object["5"] === object["8"]) {
+    if (object["2"] === "x") {
+      window.alert("YOU WON :)");
+    } else if (object["2"] === "o") {
+      window.alert("YOU LOST :/");
+    }
+  } else if (object["6"] === object["7"] && object["7"] === object["8"]) {
+    if (object["6"] === "x") {
+      window.alert("YOU WON :)");
+    } else if (object["6"] === "o") {
+      window.alert("YOU LOST :/");
+    }
+  } else if (object["0"] === object["4"] && object["4"] === object["8"]) {
+    if (object["0"] === "x") {
+      window.alert("YOU WON :)");
+    } else if (object["0"] === "o") {
+      window.alert("YOU LOST :/");
+    }
+  } else if (object["2"] === object["4"] && object["4"] === object["6"]) {
+    if (object["2"] === "x") {
+      window.alert("YOU WON :)");
+    } else if (object["2"] === "o") {
+      window.alert("YOU LOST :/");
+    }
+  } else if (object["1"] === object["4"] && object["4"] === object["7"]) {
+    if (object["1"] === "x") {
+      window.alert("YOU WON :)");
+    } else if (object["1"] === "o") {
+      window.alert("YOU LOST :/");
+    }
+  } else if (object["3"] === object["4"] && object["4"] === object["5"]) {
+    if (object["3"] === "x") {
+      window.alert("YOU WON :)");
+    } else if (object["3"] === "o") {
+      window.alert("YOU LOST :/");
+    }
+  }
 }
